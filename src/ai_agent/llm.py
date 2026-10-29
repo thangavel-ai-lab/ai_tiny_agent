@@ -1,5 +1,5 @@
 import json
-import urllib
+import urllib.request
 from src.ai_agent.response import Response
 
 
@@ -40,11 +40,10 @@ class LLM:
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self.api_key}",
             },
-            method="POST"
         )
 
         with urllib.request.urlopen(request) as response:
-            data = json.loads(response.read().decode("utf-8"))
+            data = json.loads(response.read())
 
         #Extract the response from the data
 
@@ -61,8 +60,11 @@ class LLM:
             content=message.get("content"),
             reasoning=message.get("reasoning"),
             tool_call=tool_call,
-            meta_data=meta_data
+            metadata=meta_data,
         )
 
 
-
+if __name__ == "__main__":
+    llm = LLM(model="gemma4:e4b")
+    response = llm.generate(messages=[{"role": "user", "content": "How to create hello world program in python?"}])
+    print(response.content)
