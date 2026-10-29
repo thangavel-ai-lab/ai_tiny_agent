@@ -11,7 +11,7 @@ class Trajectory:
         """register a new run with a given query"""
         self.runs.append({"query": query, "steps": []})
 
-    def add(self, response: Response, obeservation: str | None = None) -> None:
+    def add(self, response: Response, observation: str | None = None) -> None:
 
         """record a step in the Response and optionally an observation"""
         step = Step(
@@ -19,9 +19,9 @@ class Trajectory:
             metadata=response.metadata,
         )
 
-        if obeservation is not None:
+        if observation is not None:
             step.action = response.tool_call
-            step.observation = obeservation
+            step.observation = observation
         else:
             step.answer = response.content
 
