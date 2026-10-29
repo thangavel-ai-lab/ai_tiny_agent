@@ -66,5 +66,5 @@ class LLM:
 
 if __name__ == "__main__":
     llm = LLM(model="gemma4:e4b")
-    response = llm.generate(messages=[{"role": "user", "content": "How to create hello world program in python?"}])
+    response = llm.generate(messages=[{"role": "user", "content": "tell me a joke?"}])
     print(response.content)
